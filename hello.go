@@ -130,6 +130,38 @@ func variadicfunc(nums ...int) {
 	}
 	fmt.Println(total)
 }
+
+func closure() func() int {
+	i := 0
+	return func() int {
+		i++
+		return i
+	}
+}
+
+func factorial(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * factorial(n-1)
+}
+
+func fibonanci(n int) int {
+	var annfunc func(n int) int
+	annfunc = func(n int) int {
+		if n < 2 {
+			return n
+		}
+		return annfunc(n-1) + annfunc(n-2)
+	}
+	return annfunc(n)
+}
+
+func pointer(pr *int, value int) {
+	fmt.Println("before change", value)
+	*pr = 0
+}
+
 func main() {
 	fmt.Println("Hello world")
 	fmt.Println(os.Getenv("USER"), ", Let's be friends!")
@@ -152,4 +184,20 @@ func main() {
 	fmt.Println(a, b)
 	fmt.Println("Variadic Func")
 	variadicfunc(1, 2, 3, 4)
+	fmt.Println("closure")
+	nextInt := closure()
+	fmt.Println(nextInt())
+	fmt.Println(nextInt())
+	nextInts := closure()
+	fmt.Println(nextInts())
+	fmt.Println("factorial")
+	fmt.Println(factorial(3))
+	fmt.Println("Fibbonaci")
+	fmt.Println(fibonanci(7))
+	fmt.Println("pointer")
+	data := 1
+	fmt.Println("before", &data)
+	pointer(&data, data)
+	fmt.Println("after", &data)
+	fmt.Println("changed value", data)
 }
