@@ -18,7 +18,7 @@ func Test(t *testing.T) {
 func TestWrite(t *testing.T) {
 	t.Log("TestWrite")
 	FileWrite()
-	_, err := os.ReadFile("test1")
+	_, err := os.ReadFile("test")
 	if os.IsNotExist(err) {
 		t.Errorf("File not found")
 	}
