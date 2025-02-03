@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+	"os"
+)
 
 type animal interface {
 	shout()
@@ -23,4 +27,10 @@ func main() {
 	fmt.Println("Interface")
 	h := human{"kaung", 12}
 	action(h)
+	f, err := os.Open(os.Args[1])
+	if err != nil {
+		fmt.Println("Error")
+		os.Exit(1)
+	}
+	io.Copy(os.Stdout, f)
 }
